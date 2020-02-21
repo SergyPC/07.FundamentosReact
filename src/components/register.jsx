@@ -1,21 +1,21 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom'
-import axios from "axios";
-import { BrowserRouter as Router, Route, Link, Switch, withRouter, Redirect } from "react-router-dom";
+import axios from 'axios';
+import { BrowserRouter as Router, Route, Link, Switch, withRouter, Redirect } from 'react-router-dom';
 
 export default class Register extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: "" ,
-            password:""
+            username: '' ,
+            password: ''
         };
-    }; 
+    };
 
     handleClickButton = () => {
         this.setState({
-            username: "",
-            password:""
+            username: '',
+            password: ''
         });
     };
 
@@ -66,14 +66,18 @@ export default class Register extends Component {
                 { withCredentials: true }
             )
 
-            if (response.status === 200) {
-                console.log("Redireccionar a Login");
-                // ReactDOM.render(<Redirect to='/login' />)
-                // location.href="./login.jsx";
-            }
+            console.log('Redireccionamos a Login');
+            this.props.history.push('/login');
+            //this.props.history.push('/detail/${advert.id}');
+
+            // if (response.status === 200) {
+            //     console.log('Redireccionar a Login');
+            //     this.props.history.push('/login');
+            //     //console.log('Response:', response);
+            // }
 
         } catch (error) {
-            console.error(error);
+            console.error(`This user name (${this.state.username}) is already registered. Error: ${error}`);
             alert(`This user name (${this.state.username}) is already registered`)
         }
 
@@ -131,12 +135,41 @@ export default class Register extends Component {
         const {username, password} = this.state;
 
         return (
+            <div>
             <form onSubmit={this.createRegister}>
-                <input type="text" value={username} onChange={this.handleChageUsername} />
-                <input type="password" value ={password}  onChange={this.handleChangePassword} />
-                <input type="submit" value="Register"  />
-                <input type ="reset"  value ="Clear" onClick ={this.handleClickButton} />
+                <h2>Register</h2>
+
+				<label for='username' className='form-label'> Username </label>
+                <input type='text'
+                    name='username' 
+                    id='username' 
+                    className='form-input' 
+                    placeholder='username'
+                    value={username}
+                    onChange={this.handleChageUsername} 
+                    required/>
+                <br />
+				<label for='password' className='form-label'> password </label>
+                <input type='password'
+                    name='password' 
+                    id='password' 
+                    className='password form-input' 
+                    placeholder='password'
+                    value ={password}
+                    onChange={this.handleChangePassword}  
+                    required /> 
+                <br /> 
+                <input type='submit' value='Register' />
+                <input type ='reset'  value ='Clear' onClick ={this.handleClickButton} />
             </form>
+            
+            Are you registered?
+            <Link to="/login">
+                <button>Go to login</button>
+            </Link>
+
+            </div>
+            
         );
     };
 

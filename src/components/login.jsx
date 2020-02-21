@@ -9,7 +9,11 @@ export default class Dashboard extends Component {
     render = () => {
         return (
             <div>
-                Estamos en Login
+                <h2>Login</h2>
+                Are you not registered?
+                <Link to="/register">
+                    <button>Go to register</button>
+                </Link>
             </div>
         );
     };

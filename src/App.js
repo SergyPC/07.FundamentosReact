@@ -7,6 +7,7 @@ import {
   Route,
   Link,
   Switch,
+  Redirect,
   withRouter
 } from "react-router-dom";
 
@@ -26,13 +27,14 @@ function App() {
         <Router>
           <Switch>
             <Route path="/dashboard" component={Dashboard} />
-            <Route path={`/detail/:advertId`} component={Detail} />
-            <Route component={Register} />
-            <Route path={`/login`} component={Login} />
+            <Route path="/detail/:advertId" component={Detail} />
+            <Route path="/register" component={Register} />
+            <Route path="/login" component={Login} />
+            <Redirect to="/login" />
           </Switch>
         </Router>
 
-        <img src={logo} className="App-logo" alt="logo" />
+        {/* <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
@@ -43,9 +45,8 @@ function App() {
           rel="noopener noreferrer"
         >
           Learn React
-        </a>
+        </a> */}
       </header>
-
 
     </div>
   );
