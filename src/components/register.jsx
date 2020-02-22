@@ -1,7 +1,8 @@
-import React, {Component} from 'react';
-import ReactDOM from 'react-dom'
-import axios from 'axios';
+import React, { Component } from 'react';
+// import ReactDOM from 'react-dom'
+// import axios from 'axios';
 import { BrowserRouter as Router, Route, Link, Switch, withRouter, Redirect } from 'react-router-dom';
+import { userRegister } from '../js/api.js';
 
 export default class Register extends Component {
     constructor(props) {
@@ -27,14 +28,14 @@ export default class Register extends Component {
 
     handleChangePassword = (event) => {
         this.setState({
-        password: event.target.value
+            password: event.target.value
         });
     };
 
     createRegister = async (event) => {
         event.preventDefault();
         //alert('UserName: ' + this.state.username + " - Password: "  + this.state.password);
-    
+
         // const response = await fetch('http://34.89.93.186:8080/apiv1/register',{
         //     method: 'POST',
         //     body: JSON.stringify({
@@ -57,17 +58,25 @@ export default class Register extends Component {
         //     { withCredentials: true }
         // );
         try {
-            const response = await axios.post(
-                'http://34.89.93.186:8080/apiv1/register',
-                {
-                    username: this.state.username,
-                    password: this.state.password
-                },
-                { withCredentials: true }
-            )
+            const response = await userRegister(this.state.username, this.state.password);
+            //response ? this.props.history.push("/login") : console.log("error registering")
+            //console.log('response.status', response.status);
 
             console.log('Redireccionamos a Login');
+            window.alert(`The user name, ${this.state.username}, has been successfully registered`);
             this.props.history.push('/login');
+
+            // const response = await axios.post(
+            //     'http://34.89.93.186:8080/apiv1/register',
+            //     {
+            //         username: this.state.username,
+            //         password: this.state.password
+            //     },
+            //     { withCredentials: true }
+            // )
+
+            // console.log('Redireccionamos a Login');
+            // this.props.history.push('/login');
             //this.props.history.push('/detail/${advert.id}');
 
             // if (response.status === 200) {
@@ -77,8 +86,8 @@ export default class Register extends Component {
             // }
 
         } catch (error) {
-            console.error(`This user name (${this.state.username}) is already registered. Error: ${error}`);
-            alert(`This user name (${this.state.username}) is already registered`)
+            console.error(`The user name, ${this.state.username}, is already registered (${error}).`);
+            alert(`The user name, ${this.state.username}, is already registered.`)
         }
 
         
@@ -136,41 +145,43 @@ export default class Register extends Component {
 
         return (
             <div>
-            <form onSubmit={this.createRegister}>
                 <h2>Register</h2>
-
-				<label for='username' className='form-label'> Username </label>
-                <input type='text'
-                    name='username' 
-                    id='username' 
-                    className='form-input' 
-                    placeholder='username'
-                    value={username}
-                    onChange={this.handleChageUsername} 
-                    required/>
-                <br />
-				<label for='password' className='form-label'> password </label>
-                <input type='password'
-                    name='password' 
-                    id='password' 
-                    className='password form-input' 
-                    placeholder='password'
-                    value ={password}
-                    onChange={this.handleChangePassword}  
-                    required /> 
-                <br /> 
-                <input type='submit' value='Register' />
-                <input type ='reset'  value ='Clear' onClick ={this.handleClickButton} />
-            </form>
-            
-            Are you registered?
-            <Link to="/login">
-                <button>Go to login</button>
-            </Link>
+                <form onSubmit={this.createRegister}>
+                    <label for='username' className='form-label'> Username </label>
+                    &nbsp;
+                    <input type='text'
+                        name='username' 
+                        id='username' 
+                        className='form-input' 
+                        placeholder='username'
+                        value={username}
+                        onChange={this.handleChageUsername} 
+                        required/>
+                    <br />
+                    <label for='password' className='form-label'> password </label>
+                    &nbsp;
+                    <input type='password'
+                        name='password' 
+                        id='password' 
+                        className='password form-input' 
+                        placeholder='password'
+                        value ={password}
+                        onChange={this.handleChangePassword}  
+                        required /> 
+                    <br /> 
+                    <input type='submit' value='Register' />
+                    &nbsp;
+                    <input type ='reset'  value ='Clear' onClick ={this.handleClickButton} />
+                </form>
+                
+                Are you registered?
+                &nbsp;
+                <Link to="/login">
+                    <button>Go to login</button>
+                </Link>
 
             </div>
             
         );
     };
-
 }

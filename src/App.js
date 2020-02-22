@@ -1,5 +1,6 @@
 import React, { useEffect, Component} from 'react';
 import logo from './logo.svg';
+import './css/reset.css';
 import './App.css';
 
 import {
@@ -24,13 +25,15 @@ function App() {
     <div className="App">
       <header className="App-header">
 
+        <h1>MIL ANUNCIOS</h1>
+
         <Router>
           <Switch>
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/detail/:advertId" component={Detail} />
             <Route path="/register" component={Register} />
             <Route path="/login" component={Login} />
-            <Redirect to="/login" />
+            <Redirect to="/dashboard" />
           </Switch>
         </Router>
 
