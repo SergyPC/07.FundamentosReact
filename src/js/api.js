@@ -41,15 +41,33 @@ const API_URL_BASE = 'http://34.89.93.186:8080/apiv1/';
 
 export const userRegister = async (username, password) => {
     try {
-        const response = await axios.post(
-            `${API_URL_BASE}register`,
-            {
-                username: username,
-                password: password
+        // const response = await axios.post(
+        //     `${API_URL_BASE}register`,
+        //     {
+        //         username: username,
+        //         password: password
+        //     },
+        //     { withCredentials: true }
+        // )
+        // return response;
+
+        const endpoint = `${API_URL_BASE}register`;
+        const response = await fetch (endpoint, {
+            method: 'POST',
+            body: JSON.stringify({
+                'username': username,
+                'password': password,
+            }),
+            headers: {
+                'content-type': 'application/json'
             },
-            { withCredentials: true }
-        )
-        return response;
+        });
+        
+        const data = await response.json();
+        const isRegisterOk = data.success;
+        //isRegisterOk ? window.alert("usuario correctamente creado") : window.alert('error creando usuario');
+        return isRegisterOk;
+
     } catch (error) {
         throw error;
     }
@@ -57,142 +75,142 @@ export const userRegister = async (username, password) => {
 
 export const userLogin = async (username, password) => {
     try {
-        // console.log('Entramos en userLogin');
-        // console.log(`URL: ${API_URL_BASE}login`);
-        // console.log(`username & password: ${username} & ${password}`);
-        const response = await axios.post(
-            `${API_URL_BASE}login`,
-            {
-                username: username,
-                password: password
-            },
-            { withCredentials: true }
-        )
-        return response;
-    } catch (error) {
-        throw error;
-    }
-}
-
-export const getAds = async () => {
-    try {
-        // console.log('Entramos en getAds');
-        // console.log(`URL: ${API_URL_BASE}anuncios`);
-        const response = await axios.get(
-            `${API_URL_BASE}anuncios`,
-            { withCredentials: true }
-        )
-
-        console.log(`response: ${response}`);
-        
-        const { success, error, results } = response;
-
-        console.log(`success & error: ${success} & ${error}`);
-        console.log(`results: ${results}`);
-
-        // if (success) {
-        //     return results;
-        // } else if (error) {
-        //     return error;
-        // }
-
+        // // console.log('Entramos en userLogin');
+        // // console.log(`URL: ${API_URL_BASE}login`);
+        // // console.log(`username & password: ${username} & ${password}`);
+        // const response = await axios.post(
+        //     `${API_URL_BASE}login`,
+        //     {
+        //         username: username,
+        //         password: password
+        //     },
+        //     { withCredentials: true }
+        // )
         // return response;
 
+        const endpoint = `${API_URL_BASE}login`;
+        const response = await fetch (endpoint, {
+            method: 'POST',
+            body: JSON.stringify({
+                'username': username,
+                'password': password,
+            }),
+            headers: {
+                'content-type': 'application/json'
+            },
+            credentials: 'include',
+        });
+        
+        const data = await response.json();
+        const hasLogged = data.success;
+        return hasLogged;
+
     } catch (error) {
         throw error;
     }
 }
 
-// getAds: async () => {
-//     try {
-//       const response = await fetch(`${adsApiEndpoint}`, {
-//         method: 'GET',
-//         headers: {
-//           'Content-type': 'application/json'
-//         },
-//         credentials: 'include'
-//       });
+export const getAds = async (search) => {
+    try {
+        //console.log('Entramos en getAds');
+        // // console.log(`URL: ${API_URL_BASE}anuncios`);
+        // const endpoint = `${API_URL_BASE}anuncios`;
+        // //const endpoint = `${API_URL_BASE}anuncios?${search}`;
+        // const response = await axios (endpoint, {
+        //     method: 'GET',
+        //     withCredentials: true,
+        // });
+        
+        // const results = await response.data.results;
 
-//       const isGetAdsSuccesfull = await response.json();
-//       const { success, error, results } = isGetAdsSuccesfull;
+        // console.log(`response: ${response}`);      
+        // console.log(`results: ${results}`);
 
-//       if (success) {
-//         return results;
-//       } else if (error) {
-//         return error;
-//       }
-//     } catch (err) {
-//       console.error(err);
-//     }
-//   }
+        // return results;
+        
+        console.log('Entramos en getAds');
+        const endpoint = `${API_URL_BASE}anuncios?${search}`;
+        //const endpoint = `${API_URL_BASE}anuncios`;
+        console.log('endpoint=', endpoint);
+        const response = await fetch (endpoint, {
+            method: 'GET',
+            credentials: 'include',
+        });
+        
+        const data = await response.json();
+        console.log('Salimos de getAds');
+        return data;
 
+        // const data = await response.json();
+        // const results = data.results;
+        // console.log('Salimos de getAds');
+        // return results;
 
+    } catch (error) {
+        //console.log("Error getAds:", error);
+        throw error;
+  }
+}
 
+export const getAd = async (id) => {
+    try {
+        //console.log('Entramos en getAd');
+        // // console.log(`URL: ${API_URL_BASE}anuncios`);
+        // const endpoint = `${API_URL_BASE}anuncios`;
+        // //const endpoint = `${API_URL_BASE}anuncios?${id}`;
+        // const response = await axios (endpoint, {
+        //     method: 'GET',
+        //     withCredentials: true,
+        // });
+        
+        // const results = await response.data.results;
 
-// const api = (apiURL = API_URL_BASE) => {
+        // console.log(`response: ${response}`);      
+        // console.log(`results: ${results}`);
 
-    // const searchAPIUrlEndpoint = `${apiURL}?search`;
-    // const advertAPIUrlEndpoint = `${apiURL}?limit=10`;
+        // return results;
+        
+        //console.log('Entramos en getAd');
+        const endpoint = `${API_URL_BASE}anuncios/${id}`;
+        //const endpoint = `${API_URL_BASE}anuncios`;
+        console.log('endpoint=', endpoint);
+        const response = await fetch (endpoint, {
+            method: 'GET',
+            credentials: 'include',
+        });
+        
+        // const data = await response.json();
+        // const result = data.result;
+        // return result;
 
+        const data = await response.json();
+        return data;
 
-  //     const response = await axios.post(
-  //       'http://34.89.93.186:8080/apiv1/login',
-  //       {
-  //         username: 'jeseromero',
-  //         password: 'jeseromero'
-  //       },
-  //       { withCredentials: true }
-  //     );
+    } catch (error) {
+        throw error;
+  }
+}
 
-  //     console.log(response);
+export const getTags = async () => {
+    try {
+        console.log('Entramos en getTags');
+        const endpoint = `${API_URL_BASE}tags`;
+        console.log('endpoint=', endpoint);
+        const response = await fetch (endpoint, {
+            method: 'GET',
+            credentials: 'include',
+        });
+        
+        const data = await response.json();
+        const results = data.results;
 
-    // return {
-    //     /*create registry*/
-    //     createRegistry: async (usu, pwd) => {
-    //         try{
-                
-    //             // usu='sergio';
-    //             // pwd='perez';
+        //console.log(`data: ${data}`);
+        //console.log(`data.results: ${results}`);
+        console.log('Salimos de getTags');
 
-    //             const response = await axios.post(
-    //                 `${apiURL}register`,
-    //                 {
-    //                     username: usu,
-    //                     password: pwd
-    //                 },
-    //                 { withCredentials: true }
-    //             );
-                
-    //             //debugger;
+        return results;
 
-    //             console.log(`Response: ${response}`);
-
-    //             console.log(`Status code: ${response.status}`);
-    //             console.log(`Status text: ${response.statusText}`);
-    //             console.log(`Request method: ${response.request.method}`);
-    //             console.log(`Path: ${response.request.path}`);
-    //             console.log(`Date: ${response.headers.date}`);
-    //             console.log(`Data: ${response.data}`);
-
-
-    //             /*if code distintc 200 or 300:*/
-    //             if(response.config.validateStatus == false){
-    //                 new Error(`Error creating Registry. Code error: ${response.status}`);
-    //             }
-
-    //             // const registries = response.data.beer.likes;
-
-    //             // return registries;
-
-    //             // const registries = await response.json();
-    //             // return registries;
-
-    //         }catch(err){
-    //             console.log(err.message);
-    //             throw err;
-    //         }
-    //     }
-    // }
-// };
-
-//export default api;
+    } catch (error) {
+        throw error;
+  }
+}
