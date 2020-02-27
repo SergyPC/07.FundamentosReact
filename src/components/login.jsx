@@ -39,16 +39,31 @@ export default class Register extends Component {
 
     getLogin = async (event) => {
         event.preventDefault();
+        const { username, password } = this.state;
 
-        try {
-            const response = await userLogin(this.state.username, this.state.password);
-            //response ? this.props.history.push("/dashboard") : console.log("error login")
-            //console.log('Redireccionamos a dashboard');
-            this.props.history.push('/dashboard');
-        } catch (error) {
-            console.error(`The user name, ${this.state.username}, doesn't exist (${error}).`);
-            alert(`The user name, ${this.state.username}, doesn't exist.`);
-        }
+        // try {
+        //     const response = await userLogin(username, password);
+        //     //response ? this.props.history.push("/dashboard") : console.log("error login")
+        //     //console.log('Redireccionamos a dashboard');
+        //     //this.props.history.push('/dashboard');
+        // } catch (error) {
+        //     console.error(`The user name, ${this.state.username}, doesn't exist (${error}).`);
+        //     alert(`The user name, ${this.state.username}, doesn't exist.`);
+        // }
+              
+        const isLoginCorrect = await userLogin(username, password);
+
+        // console.log("isLoginCorrect.success:", isLoginCorrect.success);
+        // console.log("isLoginCorrect.error:", isLoginCorrect.error);
+
+        isLoginCorrect.error ? alert(`The username, ${this.state.username}, doesn't exist.`) : this.props.history.push('/dashboard');
+
+        // if (isLoginCorrect.error) {
+        //     alert(`The user name, ${this.state.username}, doesn't exist.`);
+        // } else {
+        //     this.props.history.push('/dashboard');
+        // }
+
     }
 
     render = () => {

@@ -39,17 +39,32 @@ export default class Register extends Component {
 
     createRegister = async (event) => {
         event.preventDefault();
+        const { username, password } = this.state;
 
-        try {
-            const response = await userRegister(this.state.username, this.state.password);
-            //response ? this.props.history.push("/login") : console.log("error registering")
-            //console.log('Redireccionamos a Login');
-            window.alert(`The user name, ${this.state.username}, has been successfully registered`);
+        // try {
+        //     const response = await userRegister(this.state.username, this.state.password);
+        //     //response ? this.props.history.push("/login") : console.log("error registering")
+        //     //console.log('Redireccionamos a Login');
+        //     window.alert(`The user name, ${this.state.username}, has been successfully registered`);
+        //     this.props.history.push('/login');
+
+        // } catch (error) {
+        //     console.error(`The user name, ${this.state.username}, is already registered (${error}).`);
+        //     alert(`The user name, ${this.state.username}, is already registered.`);
+        // }
+
+        const isRegisterCorrect = await userRegister(username, password);
+
+        // console.log("isRegisterCorrect.success:", isRegisterCorrect.success);
+        // console.log("isRegisterCorrect.error:", isRegisterCorrect.error);
+
+        //isRegisterCorrect.error ? alert(`The user name, ${this.state.username}, is already registered.`) :  this.props.history.push('/login');
+
+        if (isRegisterCorrect.error) {
+            alert(`The username, ${this.state.username}, is already registered.`);
+        } else {
+            alert(`The username, ${this.state.username}, has been successfully registered`)
             this.props.history.push('/login');
-
-        } catch (error) {
-            console.error(`The user name, ${this.state.username}, is already registered (${error}).`);
-            alert(`The user name, ${this.state.username}, is already registered.`);
         }
     }
 

@@ -62,14 +62,17 @@ export const userRegister = async (username, password) => {
                 'content-type': 'application/json'
             },
         });
-        
-        const data = await response.json();
-        const isRegisterOk = data.success;
-        //isRegisterOk ? window.alert("usuario correctamente creado") : window.alert('error creando usuario');
+
+        // const data = await response.json();
+        // const isRegisterOk = data.success;
+        // return isRegisterOk;
+
+        const isRegisterOk = await response.json();
         return isRegisterOk;
 
     } catch (error) {
-        throw error;
+        console.error(`The username, ${username}, doesn't exist (${error}).`);
+        //throw error;
     }
 }
 
@@ -101,12 +104,17 @@ export const userLogin = async (username, password) => {
             credentials: 'include',
         });
         
-        const data = await response.json();
-        const hasLogged = data.success;
-        return hasLogged;
+        // const data = await response.json();
+        // const loginCorrect = data.success;
+        // console.log("loginCorrect:", loginCorrect);
+        // return loginCorrect;
+
+        const loginCorrect = await response.json();
+        return loginCorrect;
 
     } catch (error) {
-        throw error;
+        console.error(`The username, ${username}, doesn't exist (${error}).`);
+        //throw error;
     }
 }
 
@@ -128,17 +136,17 @@ export const getAds = async (search) => {
 
         // return results;
         
-        console.log('Entramos en getAds');
+        // console.log('Entramos en getAds');
         const endpoint = `${API_URL_BASE}anuncios?${search}`;
         //const endpoint = `${API_URL_BASE}anuncios`;
-        console.log('endpoint=', endpoint);
+        // console.log('endpoint=', endpoint);
         const response = await fetch (endpoint, {
             method: 'GET',
             credentials: 'include',
         });
         
         const data = await response.json();
-        console.log('Salimos de getAds');
+        // console.log('Salimos de getAds');
         return data;
 
         // const data = await response.json();
@@ -173,7 +181,7 @@ export const getAd = async (id) => {
         //console.log('Entramos en getAd');
         const endpoint = `${API_URL_BASE}anuncios/${id}`;
         //const endpoint = `${API_URL_BASE}anuncios`;
-        console.log('endpoint=', endpoint);
+        // console.log('endpoint=', endpoint);
         const response = await fetch (endpoint, {
             method: 'GET',
             credentials: 'include',
@@ -193,9 +201,9 @@ export const getAd = async (id) => {
 
 export const getTags = async () => {
     try {
-        console.log('Entramos en getTags');
+        // console.log('Entramos en getTags');
         const endpoint = `${API_URL_BASE}tags`;
-        console.log('endpoint=', endpoint);
+        // console.log('endpoint=', endpoint);
         const response = await fetch (endpoint, {
             method: 'GET',
             credentials: 'include',
@@ -206,7 +214,7 @@ export const getTags = async () => {
 
         //console.log(`data: ${data}`);
         //console.log(`data.results: ${results}`);
-        console.log('Salimos de getTags');
+        // console.log('Salimos de getTags');
 
         return results;
 
