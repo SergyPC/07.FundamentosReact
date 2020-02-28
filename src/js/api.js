@@ -34,7 +34,7 @@
 //         ]
 //     }
 
-import axios from 'axios'; 
+// import axios from 'axios'; 
 // const axios = require('axios');
 
 const API_URL_BASE = 'http://34.89.93.186:8080/apiv1/';
@@ -222,3 +222,108 @@ export const getTags = async () => {
         throw error;
   }
 }
+
+// export const getTagss = async () => {
+//     try {
+//         // console.log('Entramos en getTags');
+//         const endpoint = `${API_URL_BASE}tags`;
+//         // console.log('endpoint=', endpoint);
+//         const response = await fetch (endpoint, {
+//             method: 'GET',
+//             credentials: 'include',
+//         });
+        
+//         // const data = await response.json();
+//         // const results = data.results;
+//         // return results;
+
+//         //console.log(`data: ${data}`);
+//         //console.log(`data.results: ${results}`);
+//         // console.log('Salimos de getTags');
+
+//         const data = await response.json();
+
+//         console.log(`data.results: ${data.results}`);
+//         console.log(`data.error: ${data.error}`);
+
+
+//         return data;
+
+//     } catch (error) {
+//         throw error;
+//   }
+// }
+
+export const createAd = async (name, price, description, tags, type, photo) => {
+    try {
+        console.log('Entramos en createAd');
+        const endpoint = `${API_URL_BASE}anuncios`;
+        console.log('endpoint=', endpoint);
+        console.log('name=', name, typeof (name));
+        console.log('price=', price, typeof (price));
+        console.log('description=', description, typeof (description));
+        console.log('tags=', tags, typeof (tags));
+        console.log('type=', type, typeof (type));
+        console.log('photo=', photo, typeof (photo));
+        // const response = await fetch (endpoint, {
+        //     method: 'POST',
+        //     body: JSON.stringify({
+        //         'name': name,
+        //         'price': parseInt(price),
+        //         'description': description,
+        //         'tags': tags,
+        //         'type': type,
+        //         'photo': photo
+        //     }),
+        //     headers: {
+        //         'content-type': 'application/json'
+        //     },
+        //     credentials: 'include',
+        // });
+
+        
+
+        const response = await fetch (endpoint, {
+            method: 'POST',
+            body: JSON.stringify({
+                'name': name.toString(),
+                'price': parseInt(price),
+                'description': description.toString(),
+                'tags': tags,
+                'type': type.toString(),
+                'photo': photo.toString()
+            }),
+            headers: {
+                'content-type': 'application/json'
+            },
+            credentials: 'include',
+        });
+
+        // const response = await fetch (endpoint, {
+        //     method: 'POST',
+        //     body: JSON.stringify({
+        //         name: `${name}`,
+        //         price: parseInt(price),
+        //         description: `${description}`,
+        //         tags: tags,
+        //         type: `${type}`,
+        //         photo: `${photo}`
+        //     }),
+        //     headers: {
+        //         'content-type': 'application/json'
+        //     },
+        //     credentials: 'include',
+        // });
+        
+        // const data = await response.json();
+        // const results = data.results;
+        // return results;
+
+        const data = await response.json();
+        return data;
+
+    } catch (error) {
+        throw error;
+  }
+}
+

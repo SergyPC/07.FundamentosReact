@@ -29,16 +29,16 @@ export default class AdBoard extends Component {
                 venta: sessionStorage.getItem('venta') ? sessionStorage.getItem('venta') : '',
                 tag: sessionStorage.getItem('tag') ? sessionStorage.getItem('tag') : '',
             }
-        }
+        };
     }
 
     loadTags = () => {
-        // console.log("Entramos en getTag");
+        // console.log("Entramos en loadTags");
         getTags()
-        //.then(data => console.log("getTag (data):", data))
+        //.then(data => console.log("loadTags (data):", data))
         .then(data => this.setState({ tags: data }));
         // console.log("this.state.tags:", this.state.tags);
-        // console.log("Salimos de getTag");
+        // console.log("Salimos de loadTags");
     }
 
     // loadAds = (search) => {
@@ -142,6 +142,10 @@ export default class AdBoard extends Component {
         this.loadAds('');
     }
 
+    returnToLogin = () => {
+        this.props.history.push(`/login`);
+    }
+
     render() {
         // console.log("this.state.params (render):", this.state.params)
         // console.log("this.state.tags (render):", this.state.tags)
@@ -225,24 +229,22 @@ export default class AdBoard extends Component {
                         </Form.Row>
 
                         <Form.Row>
-                            <Form.Group as={Col} md="8" controlId="formGridMinPrice">
+                            <Form.Group as={Col} md="8" controlId="formGridSearch">
                                 <Button type="submit" variant="primary" size="lg" block>
                                     Search ADs
                                 </Button>
                             </Form.Group>
 
-                            <Form.Group as={Col} md="2" controlId="formGridMaxPrice">
+                            <Form.Group as={Col} md="2" controlId="formGridClearFilter">
                                 <Button variant="warning" size="lg" block onClick={this.clearFilter}>
-                                    Clear Filter
+                                    ClearFilter
                                 </Button>
                             </Form.Group>
 
-                            <Form.Group as={Col} md="2" controlId="formGridMaxPrice">
-                                <Link to="/login">
-                                    <Button variant="danger" size="lg" block >
-                                        Log Out
-                                    </Button>
-                                </Link>
+                            <Form.Group as={Col} md="2" controlId="formGridLogOut">
+                                <Button variant="danger" size="lg" block onClick={this.returnToLogin}>
+                                    Log Out
+                                </Button>
                             </Form.Group>
                         </Form.Row>
 

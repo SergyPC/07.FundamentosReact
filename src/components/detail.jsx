@@ -23,7 +23,9 @@ export default class Detail extends Component {
 
     loadAd = async (id) => {
         const ad = await getAd(id);
-        if (ad.error) {
+        // if (ad.error) {
+        if (ad.error === 'Error: Not logged in') {
+            console.log(ad.error);
             //alert('No está logado o su sesión ha expirado. Le redireccionamos a Log In para que lo vuelva a realizar.');
             alert('You are not logged in, or your session has been expired. \n\nWe redirect you to Log In to do it again.');
             this.props.history.push('/login');
@@ -44,6 +46,14 @@ export default class Detail extends Component {
         // console.log("Salimos de componentDidMount");
     }
 
+    returnToDashboard = () => {
+        this.props.history.push(`/dashboard?`);
+    }
+
+    returnToLogin = () => {
+        this.props.history.push(`/login`);
+    }
+
     render() {
         // console.log("this.state.data (render):", this.state.data)
         const data = this.state.data;
@@ -60,20 +70,16 @@ export default class Detail extends Component {
                 
                 &nbsp;
                 <Form.Row>
-                    <Form.Group as={Col} md="10" controlId="formGridMinPrice">
-                        <Link to={`/dashboard/`}>
-                            <Button variant="primary" size="lg" block>
-                                Return to advertisements
-                            </Button>
-                        </Link>
+                    <Form.Group as={Col} md="10" controlId="formGridCreateAd1">
+                        <Button variant="primary" size="lg" block onClick={this.returnToDashboard}>
+                            Return to advertisements
+                        </Button>
                     </Form.Group>
 
-                    <Form.Group as={Col} md="2" controlId="formGridMaxPrice">
-                        <Link to="/login">
-                            <Button variant="danger" size="lg" block >
-                                Log Out
-                            </Button>
-                        </Link>
+                    <Form.Group as={Col} md="2" controlId="formGridReturnAds1">
+                        <Button variant="danger" size="lg" block onClick={this.returnToLogin}>
+                            Log Out
+                        </Button>
                     </Form.Group>
                 </Form.Row>
             
@@ -101,20 +107,16 @@ export default class Detail extends Component {
                 <br />
 
                 <Form.Row>
-                    <Form.Group as={Col} md="10" controlId="formGridMinPrice">
-                        <Link to={`/dashboard/`}>
-                            <Button variant="primary" size="lg" block>
-                                Return to advertisements
-                            </Button>
-                        </Link>
+                    <Form.Group as={Col} md="10" controlId="formGridCreateAd2">
+                        <Button variant="primary" size="lg" block onClick={this.returnToDashboard}>
+                            Return to advertisements
+                        </Button>
                     </Form.Group>
 
-                    <Form.Group as={Col} md="2" controlId="formGridMaxPrice">
-                        <Link to="/login">
-                            <Button variant="danger" size="lg" block >
-                                Log Out
-                            </Button>
-                        </Link>
+                    <Form.Group as={Col} md="2" controlId="formGridReturnAds2">
+                        <Button variant="danger" size="lg" block onClick={this.returnToLogin}>
+                            Log Out
+                        </Button>
                     </Form.Group>
                 </Form.Row>
             </>

@@ -16,6 +16,7 @@ import Login from './components/login';
 import Register from './components/register';
 import Dashboard from './components/dashboard';
 import Detail from './components/detail';
+import CreateAd from './components/createAd';
 //import Navbarr from './components/navbar';
 
 //import api from './js/api.js';
@@ -45,7 +46,9 @@ function App() {
             <Route path="/login" component={Login} />
             <Route exact path="/dashboard/:_id" component={Detail} />
             <Route path="/dashboard" component={Dashboard} />
-            <Redirect to="/dashboard" />
+            <Route path="/createAd" component={CreateAd} />
+            
+            <Redirect to="/createAd" />
           </Switch>
         </Router>
 
