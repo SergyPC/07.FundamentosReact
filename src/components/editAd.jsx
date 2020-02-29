@@ -25,7 +25,7 @@ export default class EditAd extends Component {
     }
 
     handleChange = (event) => {
-        const { lifestyle, mobile, motor, work } = this.state;
+        //const { lifestyle, mobile, motor, work } = this.state;
         const name = event.target.name;
         const value = event.target.value;
         if(name!=='lifestyle' || name!=='mobile' || name!=='motor' || name!=='work') {
@@ -92,7 +92,7 @@ export default class EditAd extends Component {
 
     sendEditAd = async (event) => {
         event.preventDefault();
-        const { name, price, description, tags, lifestyle, mobile, motor, work, type, photo } = this.state;
+        const { name, price, description, lifestyle, mobile, motor, work, type, photo } = this.state;
 
         let myTags = [];
         if (lifestyle)
@@ -178,12 +178,14 @@ export default class EditAd extends Component {
                         <Form.Control as="select" 
                             name="type"
                             onChange={this.handleChange}
-                            value={this.state.venta} required>
-                            <option value="" defaultValue>Select the type of ad (Buy/Sell)</option>
+                            value={this.state.venta} 
+                            required
+                            >
+                            <option value="">Select the type of ad (Buy/Sell)</option>
                             {selectBuySell.map(item => {
                             const option = item.split("-");
                             if (option[0]==="1") 
-                                return ( <option value={option[1]} key={item} selected>{option[2]}</option> )
+                                return ( <option selected value={option[1]} key={item}>{option[2]}</option> )
                             else 
                                 return ( <option value={option[1]} key={item}>{option[2]}</option> )
                             })}

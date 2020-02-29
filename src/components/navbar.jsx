@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 //import { Navbar, Nav, Form, FormControl, Button }  from 'react-bootstrap';
 export default class Navbarr extends Component {
-    constructor(props) {
-        super(props); 
-    }
+    // constructor(props) {
+    //     super(props); 
+    // }
 
     // goToCreateAd = (event) => {
     //     // console.log("event", event);

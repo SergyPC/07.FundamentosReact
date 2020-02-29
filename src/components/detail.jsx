@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 // import ReactImageFallback from 'react-image-fallback';
 import { Card, Form, Col, Button }  from 'react-bootstrap';
 import Navbarr from './navbar';
-import imgNoDisponible from '../img/noDisponible.jpg'
+import imgNoDisponible from '../img/noDisponible.jpg';
 
 export default class Detail extends Component {
     constructor (props) {
