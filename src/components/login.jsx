@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 // import ReactDOM from 'react-dom'
 // import axios from 'axios';
-import { Link } from 'react-router-dom';
 //import { BrowserRouter as Router, Route, Link, Switch, withRouter, Redirect } from 'react-router-dom';
 import { userLogin } from '../js/api.js';
-import { Card, InputGroup, Form, FormControl, Col, Button }  from 'react-bootstrap';
+import { Card, InputGroup, Form, Button }  from 'react-bootstrap';
 import Navbarr from './navbar';
 import login from '../img/login.png'
 import contrasena from '../img/password.png'

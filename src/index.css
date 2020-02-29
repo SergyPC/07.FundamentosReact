@@ -38,7 +38,6 @@ main {
 
 .logIn-SignUp {
   width: 500px;
-  
 }
 
 .padre-logIn-SignUp {
@@ -56,6 +55,20 @@ main {
 .centrado {
   text-align: center;
 }
+
+.titleName {
+  text-align: center;
+  color: white;
+  /* margin-bottom: 18px;  */
+}
+
+@media (max-width: 768px) {
+  .titleName {
+    margin-bottom: 18px; 
+  }
+}
+
+
 
 
 /* a {

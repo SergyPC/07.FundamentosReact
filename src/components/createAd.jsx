@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 //import { BrowserRouter as Router, Route, Link, Switch, withRouter } from "react-router-dom";
-import { Link } from "react-router-dom";
 import { createAd, getAds, getTags } from '../js/api.js';
-
 import Navbarr from './navbar';
-import { Card, CardColumns, Form, Col, Button }  from 'react-bootstrap';
+import { Form, Col, Button }  from 'react-bootstrap';
 
 export default class CreateAd extends Component {
     constructor(props) {
@@ -26,7 +24,7 @@ export default class CreateAd extends Component {
         this.setState({
             [name]: value
         });
-        console.log("name/value: ", name, "/", value);
+        //console.log("name/value: ", name, "/", value);
     }
 
     loadAds = async (search) => {
@@ -42,9 +40,14 @@ export default class CreateAd extends Component {
         }
     }
 
+    // loadTags = () => {
+    //     getTags()
+    //     .then(data => this.setState({ tags: data }));
+    // }
+
     loadTags = () => {
         getTags()
-        .then(data => this.setState({ tags: data }));
+        .then(data => this.setState({ optionsTag: data }));
     }
 
     // loadTagsAsync = async () => {
@@ -146,7 +149,7 @@ export default class CreateAd extends Component {
         <div>
 
             <Navbarr />
-
+            <h1 className='titleName'>Create Advertisement</h1>
             <form onSubmit={this.sendCreateAd}>
 
                 {/* <Form.Control as="select" 
@@ -206,7 +209,7 @@ export default class CreateAd extends Component {
                     <Form.Label className='label'>Ad photo link:</Form.Label>
                     <Form.Control type="text" 
                         name="photo" 
-                        maxLength="85"
+                        maxLength="120"
                         placeholder="Add the link to the ad photo" 
                         onChange={this.handleChange}
                         required />

@@ -157,7 +157,7 @@ export const getAds = async (search) => {
     } catch (error) {
         //console.log("Error getAds:", error);
         throw error;
-  }
+    }
 }
 
 export const getAd = async (id) => {
@@ -196,7 +196,7 @@ export const getAd = async (id) => {
 
     } catch (error) {
         throw error;
-  }
+    }
 }
 
 export const getTags = async () => {
@@ -220,7 +220,7 @@ export const getTags = async () => {
 
     } catch (error) {
         throw error;
-  }
+    }
 }
 
 // export const getTagss = async () => {
@@ -281,8 +281,6 @@ export const createAd = async (name, price, description, tags, type, photo) => {
         //     credentials: 'include',
         // });
 
-        
-
         const response = await fetch (endpoint, {
             method: 'POST',
             body: JSON.stringify({
@@ -299,22 +297,6 @@ export const createAd = async (name, price, description, tags, type, photo) => {
             credentials: 'include',
         });
 
-        // const response = await fetch (endpoint, {
-        //     method: 'POST',
-        //     body: JSON.stringify({
-        //         name: `${name}`,
-        //         price: parseInt(price),
-        //         description: `${description}`,
-        //         tags: tags,
-        //         type: `${type}`,
-        //         photo: `${photo}`
-        //     }),
-        //     headers: {
-        //         'content-type': 'application/json'
-        //     },
-        //     credentials: 'include',
-        // });
-        
         // const data = await response.json();
         // const results = data.results;
         // return results;
@@ -324,6 +306,45 @@ export const createAd = async (name, price, description, tags, type, photo) => {
 
     } catch (error) {
         throw error;
-  }
+    }
 }
 
+export const editAd = async (name, price, description, tags, type, photo, id) => {
+    try {
+
+        // console.log('+++name=', name);
+        // console.log('+++price=', price);
+        // console.log('+++description=', description);
+        // console.log('+++tags=', tags);
+        // console.log('+++type=', type);
+        // console.log('+++photo=', photo);
+        // console.log('+++id=', id);
+
+        const endpoint = `${API_URL_BASE}anuncios/${id}`;
+        const response = await fetch (endpoint, {
+            method: 'PUT',
+            body: JSON.stringify({
+                'name': name.toString(),
+                'price': parseInt(price),
+                'description': description.toString(),
+                'tags': tags,
+                'type': type.toString(),
+                'photo': photo.toString()
+            }),
+            headers: {
+                'content-type': 'application/json'
+            },
+            credentials: 'include',
+        });
+
+        // const data = await response.json();
+        // const results = data.results;
+        // return results;
+
+        const data = await response.json();
+        return data;
+
+    } catch (error) {
+        throw error;
+    }
+}

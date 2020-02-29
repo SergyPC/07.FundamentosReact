@@ -4,7 +4,7 @@ import { getAd } from '../js/api.js';
 import { Link } from "react-router-dom";
 //import { BrowserRouter as Router, Route, Link, Switch, withRouter } from "react-router-dom";
 // import ReactImageFallback from 'react-image-fallback';
-import { Card, CardColumns, Form, Col, Button }  from 'react-bootstrap';
+import { Card, Form, Col, Button }  from 'react-bootstrap';
 import Navbarr from './navbar';
 import imgNoDisponible from '../img/noDisponible.jpg'
 

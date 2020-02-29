@@ -1,15 +1,23 @@
-import React, { useEffect, Component} from 'react';
+import React from 'react';
+//import React, { useEffect, Component} from 'react';
 //import logo from './logo.svg';
 //import './css/reset.css';
 // import './App.css';
 
+// import {
+//   BrowserRouter as Router,
+//   Route,
+//   Link,
+//   Switch,
+//   Redirect,
+//   withRouter
+// } from "react-router-dom";
+
 import {
   BrowserRouter as Router,
   Route,
-  Link,
   Switch,
-  Redirect,
-  withRouter
+  Redirect
 } from "react-router-dom";
 
 import Login from './components/login';
@@ -17,6 +25,7 @@ import Register from './components/register';
 import Dashboard from './components/dashboard';
 import Detail from './components/detail';
 import CreateAd from './components/createAd';
+import EditAd from './components/editAd';
 //import Navbarr from './components/navbar';
 
 //import api from './js/api.js';
@@ -44,11 +53,11 @@ function App() {
           <Switch>
             <Route path="/register" component={Register} />
             <Route path="/login" component={Login} />
+            <Route exact path="/editAd/id=:_id" component={EditAd} />
             <Route exact path="/dashboard/:_id" component={Detail} />
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/createAd" component={CreateAd} />
-            
-            <Redirect to="/createAd" />
+            <Redirect to="/dashboard" />
           </Switch>
         </Router>
 

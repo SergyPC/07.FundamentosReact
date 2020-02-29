@@ -127,6 +127,14 @@ export default class AdBoard extends Component {
 
     }
 
+    goToEditAd = (id) => {
+        this.props.history.push(`/editAd/id=${id}`);
+    }
+
+    goToCreateAd = (id) => {
+        this.props.history.push(`/createAd`);
+    }
+
     clearFilter = () => {
         this.setState({
             params: { ...this.state.params,
@@ -159,9 +167,19 @@ export default class AdBoard extends Component {
                 {/* <Navbarr params={this.state.params} /> */}
                 <Navbarr />
 
+                
+
                 <form onSubmit={this.sendSearch}>
                     
                     <Form.Group controlId="exampleForm.ControlSelect1">
+
+                        <Form.Row>
+                            <Form.Group as={Col} controlId="formGridCreateAd">
+                                <Button variant="dark" size="lg" block onClick={this.goToCreateAd}>
+                                    Create Ad
+                                </Button>
+                            </Form.Group>
+                        </Form.Row>
 
                         <Form.Row>
                             <Form.Group as={Col} md="2.5" controlId="formGridTypeSearch">
@@ -287,6 +305,11 @@ export default class AdBoard extends Component {
                                 </Card.Body>
                                 <Card.Footer>
                                     <small className="text-muted">Last updated: {card.updatedAt}</small>
+                                    <Link to={`/editAd/id=${card._id}`}>
+                                        <Button variant="success" size="lg" block>
+                                            Edit Ad
+                                        </Button>
+                                    </Link>
                                 </Card.Footer>
                             </Card>
                         );
