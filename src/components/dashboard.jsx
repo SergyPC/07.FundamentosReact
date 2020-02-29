@@ -113,7 +113,7 @@ export default class AdBoard extends Component {
         }
         else {
             if(minPrice || maxPrice) {
-                queryParams = (!minPrice && maxPrice) ? queryParams += `&price=0-${maxPrice}` : queryParams += `&price=${minPrice}-1000000000000`;
+                queryParams = (!minPrice && maxPrice) ? queryParams += `&price=0-${maxPrice}` : queryParams += `&price=${minPrice}-999999999999999999999999999999999999`;
             }
         }
 
