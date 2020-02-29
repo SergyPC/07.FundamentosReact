@@ -29,6 +29,11 @@ export default class Detail extends Component {
             //alert('No está logado o su sesión ha expirado. Le redireccionamos a Log In para que lo vuelva a realizar.');
             alert('You are not logged in, or your session has been expired. \n\nWe redirect you to Log In to do it again.');
             this.props.history.push('/login');
+        }
+        else if (ad.error) {
+            console.log(ad.error);
+            alert('An unexpected error has occurred (Try again later).');
+            this.props.history.push('/dashboard');
         } else {
             this.setState({
                 data: ad.result
