@@ -2,15 +2,15 @@
 
 ## Install Scripts
 
-> **Install React:** 
+**Install React:** 
 <br />
 npx create-react-app app-anuncios
 
-> **Install react-router-dom:** 
+**Install react-router-dom:** 
 <br />
 npm install react-router-dom
 
-<!-- > **Install axios:** 
+<!-- **Install axios:** 
 <br />
 npm install --save axios -->
 
