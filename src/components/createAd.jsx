@@ -176,7 +176,7 @@ export default class CreateAd extends Component {
                 {this.state.optionsTag.map(item => {
                     if (item !== null) {
                         return (
-                            <Form.Check type="checkbox" name={item} id={item} key={item} value={item} label={item} onChange={this.handleChange} />
+                            <Form.Check type="switch" name={item} id={item} key={item} value={item} label={item} onChange={this.handleChange} />
                         )
                     }
                 })}
