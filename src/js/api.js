@@ -256,15 +256,16 @@ export const getTags = async () => {
 
 export const createAd = async (name, price, description, tags, type, photo) => {
     try {
-        console.log('Entramos en createAd');
+        //console.log('Entramos en createAd');
         const endpoint = `${API_URL_BASE}anuncios`;
-        console.log('endpoint=', endpoint);
-        console.log('name=', name, typeof (name));
-        console.log('price=', price, typeof (price));
-        console.log('description=', description, typeof (description));
-        console.log('tags=', tags, typeof (tags));
-        console.log('type=', type, typeof (type));
-        console.log('photo=', photo, typeof (photo));
+        // console.log('endpoint=', endpoint);
+        // console.log('name=', name, typeof (name));
+        // console.log('price=', price, typeof (price));
+        // console.log('description=', description, typeof (description));
+        // console.log('tags=', tags, typeof (tags));
+        // console.log('type=', type, typeof (type));
+        // console.log('photo=', photo, typeof (photo));
+
         // const response = await fetch (endpoint, {
         //     method: 'POST',
         //     body: JSON.stringify({

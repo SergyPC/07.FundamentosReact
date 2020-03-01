@@ -14,17 +14,35 @@ export default class CreateAd extends Component {
             tags: [],
             optionsTag: [],
             type: '',
-            photo: ''
+            photo: '',
+
+            lifestyle: false,
+            mobile: false,
+            motor: false,
+            work: false,
         };
     }
 
     handleChange = (event) => {
+        // const name = event.target.name;
+        // const value = event.target.value;
+        // this.setState({
+        //     [name]: value
+        // });
+        // //console.log("name/value: ", name, "/", value);
+
         const name = event.target.name;
         const value = event.target.value;
-        this.setState({
-            [name]: value
-        });
-        //console.log("name/value: ", name, "/", value);
+        if(name!=='lifestyle' || name!=='mobile' || name!=='motor' || name!=='work') {
+            this.setState({
+                [name]: value
+            });
+        }
+
+        if(name==='lifestyle' || name==='mobile' || name==='motor' || name==='work') {
+            //console.log("---event.target: ", event.target.checked)
+            this.setState({ [name]: event.target.checked });
+        }
     }
 
     loadAds = async (search) => {
@@ -106,22 +124,33 @@ export default class CreateAd extends Component {
         // console.log('type=', type);
         // console.log('photo=', photo);
 
-        let tags = [];
+        // let tags = [];
+        // if (lifestyle)
+        //     tags.push(lifestyle);
+        // if (mobile)
+        //     tags.push(mobile);
+        // if (motor)
+        //     tags.push(motor);
+        // if (work)
+        //     tags.push(work);
+        // // console.log('tags=', tags);
+
+        // const adCreated = await createAd(name, price, description, tags, type, photo);
+        // // const adCreated = await createAd(name, price, description, lifestyle, type, photo);
+        
+        let myTags = [];
         if (lifestyle)
-            tags.push(lifestyle);
+            myTags.push('lifestyle');
         if (mobile)
-            tags.push(mobile);
+            myTags.push('mobile');
         if (motor)
-            tags.push(motor);
+            myTags.push('motor');
         if (work)
-            tags.push(work);
+            myTags.push('work');
         
-        // console.log('tags=', tags);
-
-
-        const adCreated = await createAd(name, price, description, tags, type, photo);
-        // const adCreated = await createAd(name, price, description, lifestyle, type, photo);
+        const adCreated = await createAd (name, price, description, myTags, type, photo);
         
+
         if (adCreated.error === 'Error: Not logged in') {
             alert('You are not logged in, or your session has been expired. \n\nWe redirect you to Log In to do it again.');
             this.props.history.push('/login');
